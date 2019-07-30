@@ -1,0 +1,31 @@
+
+/* Typography
+-------------------------- */
+$--font-size-small: 12px !important;
+$--font-size-base: 12px !important;
+
+/* Checkbox
+-------------------------- */
+
+/* Pagination
+-------------------------- */
+$--pagination-font-size: 12px !important;
+
+/* Alert
+-------------------------- */
+$--alert-close-customed-font-size: 12px !important;
+
+/// fontSize||Font|1
+$--checkbox-font-size: 12px !important;
+$--input-small-font-size: 12px !important;
+ 
+/* 改变 icon 字体路径变量，必需 */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+ 
+@import "~element-ui/packages/theme-chalk/src/index";
+
+// the :export directive is the magic sauce for webpack
+// https://www.bluematador.com/blog/how-to-share-variables-between-js-and-sass
+:export {
+  theme: $--color-primary;
+}
