@@ -17,6 +17,7 @@ const ajaxUrl =
 const baseUrl = ajaxUrl;
 
 Vue.prototype.BASE_URL = baseUrl;
+Vue.prototype.HEADERS = {"Authorization" : "Bearer " + Util.getToken()};
 
 const http = axios.create({
   timeout: 1000 * 10,
@@ -46,7 +47,7 @@ http.interceptors.response.use(
   response => {
     if (response.data && response.data.code === 401) {
       // 401, token失效
-      Util.clearLoginInfo();
+      Util.removeToken()
       router.push({ name: "login" });
     }
     return response;

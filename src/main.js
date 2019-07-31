@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios';
+import 'normalize.css/normalize.css' // a modern alternative to CSS resets
 import ElementUI from 'element-ui';
 import App from './App.vue'
 import router from './router'

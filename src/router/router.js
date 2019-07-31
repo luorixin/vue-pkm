@@ -1,7 +1,8 @@
-import Home from "../views/common/Home.vue";
+import Layout from '@/layout'
 
 export const redirctRouter = {
     path: "/",
+    hidden: true,
     redirect: '/knowledge/list',
     meta: { title: '知识库' } 
 }
@@ -10,6 +11,7 @@ export const redirctRouter = {
 export const loginRouter = {
     path: "/login",
     name: "login",
+    hidden: true,
     meta: {
         title: "登录",
         noAuth: true
@@ -20,6 +22,7 @@ export const loginRouter = {
 export const page404 = {
     path: "/404",
     name: "404",
+    hidden: true,
     meta: {
         title: "404-页面不存在",
         noAuth: true
@@ -30,6 +33,7 @@ export const page404 = {
 export const page403 = {
   path: "/403",
   name: "403",
+  hidden: true,
   meta: {
       title: "403-没有权限",
       noAuth: true
@@ -48,25 +52,24 @@ export const constantRoutes = [
 export const appRouter = [
     {
         path: "/knowledge",
-        icon: "iconfont eb-icon-goods",
-        meta: { title: "知识库" },
-        component: Home,
+        meta: { title: "知识库", icon: "iconfont eb-icon-goods", },
+        component: Layout,
         children: [
             {
                 path: "list",
-                meta: { title: "商品列表", permission: "knowledge_list" },
+                meta: { title: "知识库列表", permission: "knowledge_list" },
                 name: "knowledgeList",
                 component: () => import("@/views/knowledge/list.vue")
             },
             {
                 path: "search",
-                meta: { title: "新增商品", permission: "knowledge_search" },
+                meta: { title: "知识库搜索", permission: "knowledge_search" },
                 name: "search",
                 component: () => import("@/views/knowledge/search.vue")
             },
         ]
     },
-    { path: '*', redirect: '/404', meta: { title: "404",notInMenu: true } }
+    { path: '*', redirect: '/404', hidden: true, meta: { title: "404",notInMenu: true } }
 ];
 
 // 所有上面定义的路由都要写在下面的routers里

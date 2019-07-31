@@ -4,14 +4,14 @@ import "nprogress/nprogress.css"
 import Util from "@/util";
 import VueRouter from "vue-router";
 import store from "@/store";
-import {  constantRoutes } from "./router";
+import { routers } from "./router";
 
 Vue.use(VueRouter);
 
 const createRouter = () => new VueRouter({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes: routers
 })
 
 const router = createRouter()
@@ -20,20 +20,23 @@ NProgress.configure({ showSpinner: false })
 
 
 // 页面刷新时，重新赋值
-if (Util.getStore("collapse")) {
-    store.commit("common/changeCollapse", JSON.parse(Util.getStore("collapse")));
+if (Util.getStore("name")) {
+  store.commit("user/SET_NAME", Util.getStore("name"));
 }
-if (Util.getStore("currentMenu")) {
-    store.commit("common/setCurrentMenu", Util.getStore("currentMenu"));
+if (Util.getStore("showSettings")) {
+  store.commit("settings/CHANGE_SETTING", {key: 'showSettings', value: Util.getStore("showSettings")});
 }
-if (Util.getStore("tagsList")) {
-    store.commit("common/setTagsList", JSON.parse(Util.getStore("tagsList")));
+if (Util.getStore("tagsView")) {
+  store.commit("settings/CHANGE_SETTING", {key: 'tagsView', value: Util.getStore("tagsView")});
 }
-if (Util.getStore("currentTag")) {
-    store.commit("common/setCurrentTag", Util.getStore("currentTag"));
+if (Util.getStore("fixedHeader")) {
+  store.commit("settings/CHANGE_SETTING", {key: 'fixedHeader', value: Util.getStore("fixedHeader")});
+}
+if (Util.getStore("sidebarLogo")) {
+  store.commit("settings/CHANGE_SETTING", {key: 'sidebarLogo', value: Util.getStore("sidebarLogo")});
 }
 if (Util.getStore("theme")) {
-    store.commit("common/changeTheme", Util.getStore("theme"));
+    store.commit("settings/CHANGE_SETTING", {key: 'theme', value: Util.getStore("theme")});
 }
 
 const whiteList = ['/login'] // no redirect whitelist

@@ -1,4 +1,8 @@
 @import './element-variables.scss';
+@import './variables.scss';
+@import './mixin.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
 @import './iconfont.scss';
 @import './transition.scss';
 
@@ -17,14 +21,90 @@ body,
 }
 
 body {
-  font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif;
 }
+
 
 a {
   text-decoration: none
 }
 
-/* 清理浮动 */
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+#app {
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.no-padding {
+  padding: 0px !important;
+}
+
+.padding-content {
+  padding: 4px 0;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.fr {
+  float: right;
+}
+
+.fl {
+  float: left;
+}
+
+.pr-5 {
+  padding-right: 5px;
+}
+
+.pl-5 {
+  padding-left: 5px;
+}
+
+.block {
+  display: block;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.inlineBlock {
+  display: block;
+}
+
 .clearfix {
   &:after {
     visibility: hidden;
@@ -36,39 +116,98 @@ a {
   }
 }
 
-.content-box {
-  position: absolute;
-  left: 200px;
-  right: 0;
-  top: 70px;
-  bottom: 0;
-  padding-bottom: 30px;
-  -webkit-transition: left .3s ease-in-out;
-  transition: left .3s ease-in-out;
-  background: #f0f0f0;
+aside {
+  background: #eef1f6;
+  padding: 8px 24px;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  display: block;
+  line-height: 32px;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  a {
+    color: #337ab7;
+    cursor: pointer;
+
+    &:hover {
+      color: rgb(32, 160, 255);
+    }
+  }
 }
 
-.content {
-  width: auto;
-  height: 100%;
-  padding: 0 10px 10px 10px;
-  overflow-y: scroll;
-  box-sizing: border-box;
+//main-container全局样式
+.app-container {
+  padding: 20px;
 }
 
-.content-collapse {
-  left: 65px;
+.components-container {
+  margin: 30px 50px;
+  position: relative;
 }
 
-.container {
-  padding: 30px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.pagination-container {
+  margin-top: 30px;
 }
 
-.crumbs {
-  margin: 10px 0;
+.text-center {
+  text-align: center
+}
+
+.sub-navbar {
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  width: 100%;
+  text-align: right;
+  padding-right: 20px;
+  transition: 600ms ease position;
+  background: linear-gradient(90deg, rgba(32, 182, 249, 1) 0%, rgba(32, 182, 249, 1) 0%, rgba(33, 120, 241, 1) 100%, rgba(33, 120, 241, 1) 100%);
+
+  .subtitle {
+    font-size: 20px;
+    color: #fff;
+  }
+
+  &.draft {
+    background: #d0d0d0;
+  }
+
+  &.deleted {
+    background: #d0d0d0;
+  }
+}
+
+.link-type,
+.link-type:focus {
+  color: #337ab7;
+  cursor: pointer;
+
+  &:hover {
+    color: rgb(32, 160, 255);
+  }
+}
+
+.filter-container {
+  padding-bottom: 10px;
+
+  .filter-item {
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+}
+
+//refine vue-multiselect plugin
+.multiselect {
+  line-height: 16px;
+}
+
+.multiselect--active {
+  z-index: 1000 !important;
 }
 
 .pagination {
@@ -76,204 +215,28 @@ a {
   text-align: right;
 }
 
-.plugins-tips {
-  padding: 20px 10px;
-  margin-bottom: 20px;
-}
-
-.el-button+.el-tooltip {
-  margin-left: 10px;
-}
-
-.el-table tr:hover {
-  background: #f6faff;
-}
-
-.row-expand-cover .el-table__expand-icon{
-    visibility:hidden;
-}
-
-.mgb20 {
-  margin-bottom: 20px;
-}
-
-.move-enter-active,
-.move-leave-active {
-  transition: opacity .5s;
-}
-
-.move-enter,
-.move-leave {
-  opacity: 0;
-}
-
-.min-size>span{
-  font-size: 12px!important;
-}
-
-.picFront{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: #333;
-  color:#fff;
-  text-align: center;
-}
-
-/*BaseForm*/
-
-.form-box {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  .line{
-    text-align: center;
-  }
-}
-
-.el-time-panel__content::after,
-.el-time-panel__content::before {
-  margin-top: -7px;
-}
-
-.el-time-spinner__wrapper .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
-  padding-bottom: 0;
-}
-
-.el-form-item__label{
-  font-size:12px!important;
-}
-
-.imgcontent .el-image{
-  float:left;
-}
-.image-slot{
-  width: 60px;
-  height: 60px;
-  float: left;
-  margin-right: 10px;
-  text-align: center;
-  border: 1px solid #dfdfdf;
-  .el-icon-picture-outline{
-    font-size: 20px;
-    line-height: 60px;
-  }
-}
-.el-tooltip__popper{
-  max-width: 500px;
-}
-
-/*Upload*/
-
-.pure-button {
-  width: 150px;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  color: #fff;
-  border-radius: 3px;
-}
-
-.g-core-image-corp-container .info-aside {
-  height: 45px;
-}
-
-.el-dialog__body {
-  padding-top: 5px!important;
-  font-size: 12px!important;
-}
-.el-radio__label {
-  font-size: 12px!important;
-}
-
-/*VueEditor*/
-
-.ql-container {
-  min-height: 400px;
-}
-
-.ql-snow .ql-tooltip {
-  transform: translateX(117.5px) translateY(10px) !important;
-}
-
-.editor-btn {
-  margin-top: 20px;
-}
-
-/*markdown*/
-
-.v-note-wrapper .v-note-panel {
-  min-height: 500px;
-}
-
-/*vuedrogtreetable*/
-.drag-tree- -header{
-padding: 5px 10px!important;
-height: 46px!important;
-}
-
 /*自定义图标*/
 [class^="eb-icon-"], [class*=" eb-icon-"]{
-font-style: normal;
-font-weight: normal;
-font-variant: normal;
-text-transform: none;
-line-height: 1;
-vertical-align: baseline;
-display: inline-block;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .el-submenu [class*=" eb-icon-"]{
-vertical-align: middle;
-margin-right: 5px;
-width: 24px;
-text-align: center;
-font-size: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+  width: 24px;
+  text-align: center;
+  font-size: 18px;
 }
 
 
 [class*=" el-icon-lx"], [class^=el-icon-lx] {
   font-family: lx-iconfont!important;
-}
-
-/*color*/
-.header{
-  background-color: #242f42;
-}
-.footer{
-  position:fixed;
-  width: 100%;
-  text-align:center;
-  line-height: 30px;
-  height:30px;
-  color: #ef4136;
-  font-size:12px;
-  bottom:0;
-}
-.login-wrap{
-  background: #c0dae7;
-}
-.plugins-tips{
-  background: #eef1f6;
-}
-.plugins-tips a{
-  color: #20a0ff;
-}
-.el-upload--text em {
-  color: #20a0ff;
-}
-.pure-button{
-  background: #20a0ff;
-}
-.tags-li.active {
-  border: 1px solid #409EFF;
-  background-color: #409EFF;
-}
-.message-title{
-  color: #20a0ff;
-}
-.collapse-btn:hover{
-  background: rgb(40,52,70);
 }

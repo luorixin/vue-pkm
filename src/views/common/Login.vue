@@ -27,8 +27,8 @@
         data: function(){
             return {
                 ruleForm: {
-                    name: 'admin',
-                    password: '123123'
+                    name: 'luorixin',
+                    password: '123456'
                 },
                 rules: {
                     name: [

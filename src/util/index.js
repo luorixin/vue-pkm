@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import { Message } from 'element-ui'
+import router from "@/router";
 
 let Util = {};
 Util.title = (title) => {
@@ -52,9 +53,16 @@ Util.removeStore = name => {
  * 统一报错信息
  */
 Util.errorProcessor = (vm, error, callback) => {
-    let result = error.response ? error.response.data.message : error.message
-    Message.error(result)
-    callback && callback()
+    let result = error.response ? error.response.data.msg : error.message
+    
+    if (error.response && error.response.status === 401) {
+      // 401, token失效
+      Util.removeToken()
+      router.push({ name: "login" });
+    }else{
+      Message.error(result)
+      callback && callback()
+    }
 }
 
 /**
@@ -241,6 +249,38 @@ Util.convertCurrency = (money) => {
         chineseStr += cnInteger;  
     }  
     return chineseStr;  
+}
+
+/**
+ * Check if an element has a class
+ * @param {HTMLElement} elm
+ * @param {string} cls
+ * @returns {boolean}
+ */
+Util.hasClass = (ele, cls) => {
+  return !!ele.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'))
+}
+
+
+/**
+ * Add class to element
+ * @param {HTMLElement} elm
+ * @param {string} cls
+ */
+Util.addClass = (ele, cls) => {
+  if (!Util.hasClass(ele, cls)) ele.className += ' ' + cls
+}
+
+/**
+ * Remove class from element
+ * @param {HTMLElement} elm
+ * @param {string} cls
+ */
+Util.removeClass = (ele, cls) => {
+  if (Util.hasClass(ele, cls)) {
+    const reg = new RegExp('(\\s|^)' + cls + '(\\s|$)')
+    ele.className = ele.className.replace(reg, ' ')
+  }
 }
 
 export default Util;
