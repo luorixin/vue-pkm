@@ -38,8 +38,8 @@
           </el-tag>
         </template>
       </el-table-column>
-      <el-table-column label="创建时间" prop="createdAt" width="120px"></el-table-column>
-      <el-table-column label="修改时间" prop="updatedAt" width="120px"></el-table-column>
+      <el-table-column label="创建时间" prop="createdAt" :formatter="dateFormatter" width="150px"></el-table-column>
+      <el-table-column label="修改时间" prop="updatedAt" :formatter="dateFormatter" width="150px"></el-table-column>
       <el-table-column label="存放位置" prop="position" :show-overflow-tooltip="true" width="250px"></el-table-column>
       <el-table-column label="操作" align="center" width="150px" fixed="right">
         <template slot-scope="{row}">
@@ -102,7 +102,7 @@
                 </el-upload>
             </el-form-item>
             <el-form-item label="文档链接" v-else prop="position">
-                <el-input v-model="documentForm.position" :maxlength="30"></el-input>
+                <el-input v-model="documentForm.position" :maxlength="50"></el-input>
             </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
@@ -142,6 +142,7 @@
                     desc: null,
                     docs:null,
                     docsArr: [],
+                    position: null,
                 },
                 rules: {
                     name: [
@@ -185,7 +186,7 @@
                 });
             },
             // row日期转换
-            dateFormater(row, column, cellValue) {
+            dateFormatter(row, column, cellValue) {
                 return moment(cellValue).format('YYYY-MM-DD HH:mm:ss');
                 // return cellValue;
             },
@@ -259,7 +260,8 @@
                     status: row.status,
                     type: row.type,
                     desc: row.desc,
-                    docs: row.position
+                    docs: row.position,
+                    position: row.position
                 }
                 this.documentForm.docsArr = this.documentForm.position ? this.documentForm.position.split(",").map(item => { return {name: 'doc', url: item}}) : []
                 this.documentVisible = true;
@@ -289,7 +291,7 @@
                       let req = Object.assign({}, this.documentForm)
                       req.status = Number(req.status)
                       req.type = Number(req.type)
-                      documentApi.documentCreate(req)
+                      documentApi.optDocument(req)
                       .then(response => {
                           if (response.data.code === "000001") {
                               this.$message.success(`${title}成功`);

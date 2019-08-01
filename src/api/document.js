@@ -12,10 +12,10 @@ export const documentList = (params) => $http({
 })
 
 /**
- * 添加文档
+ * 添加/修改文档
  */
-export const documentCreate = (params) => $http({
-    url: $http.adornUrl(baseUrl+'/documentCreate'),
+export const optDocument = (params) => $http({
+    url: $http.adornUrl(baseUrl+'/optDocument'),
     method: 'post',
     data: $http.adornData(params)
 })

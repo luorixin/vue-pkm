@@ -190,7 +190,7 @@ export default {
 
 <style lang="scss" scoped>
 .tags-view-container {
-  height: 34px;
+  height: 35px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;

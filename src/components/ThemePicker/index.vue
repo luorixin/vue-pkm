@@ -55,7 +55,7 @@ export default {
               styleTag.setAttribute('id', id)
               document.head.appendChild(styleTag)
             }
-            newStyle += `.tags-view-container .tags-view-wrapper .tags-view-item.active{background-color:${val}!important;border-color:${val}!important}`
+            newStyle += `.tags-view-container .tags-view-wrapper .tags-view-item.active{background-color:${val}!important;border-color:${val}!important}.pkm-search .pkm-logo{color:${val}!important}`
             styleTag.innerText = newStyle
           }
         }
